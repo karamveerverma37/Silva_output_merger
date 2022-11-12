@@ -4,5 +4,6 @@ Created by karamveer, PhD student, Pondicherry University on 12/11/2022
 #input_folder should contain only otu count tables
 
 #Dependencies
--Perl(5.0)
--Linux
+- Perl(5.0)
+
+- Linux
