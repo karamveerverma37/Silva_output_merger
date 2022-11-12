@@ -6,7 +6,7 @@ This program can generate a consolidated output table by compiling individual sa
 # Usage
 `perl Silva_merger.pl input_folder output_file.csv`
 
-# input_folder should contain only otu count tables
+input_folder : Folder name which contain all OTU count tables (only)
 
 # Dependencies
 - Perl(5.0)
