@@ -12,7 +12,7 @@ $filename='all_new.csv';
 open(FILE,$filename);
 @file=<FILE>;
 foreach $file(@file){
-	@line=split(',',$file);
+	@line=split('\t',$file);
 #extract the taxonomy column
 	push(@array,$line[5]);
 }
@@ -24,24 +24,26 @@ unshift(@Key_array,"Taxonomy\n \n");
 #print"@Key_array";
 open(KEY, '>', 'key.txt');
 print KEY "@Key_array";
-$dir='input1';
+#$dir='input1';
 @files = glob( $inputfile . '/*' );
 foreach $filename1(@files){
-	@sample=split('\.|/',$filename1);
+	#print "***$filename1***";
+	@sample=split('---|/',$filename1);
 	$sampleName=$sample[1];
 	#print "$sampleName";
-	$sampleName=uc($sampleName);
+	$sampleName1=uc($sampleName);
 	@out_array=();
-	push(@out_array,"$sampleName\n");
+	push(@out_array,"$sampleName1\n");
 	open(FILE1,$filename1);
 	@file1=<FILE1>;
 	shift(@file1);
 	my %hash1;
 	foreach $line1(@file1){
-		@line2=split(',',$line1);
+		@line2=split('\t',$line1);
 		$key=$line2[5];
 		chomp($key);
 		$value=$line2[0];
+		#print $value;
 		$hash1{$key} = $value;
 	}
 	foreach $key1(@Key_array){
@@ -62,6 +64,9 @@ foreach $filename1(@files){
 #open(OUT, '>', 'out1.tsv');
 #print OUT "@out_array";
 $key2='key.txt';
-$pattern='ERR349*';
+$patt=lc(substr($sampleName1,0,3));
+#print $patt;
+$pattern="$patt*";
 #$out2='consolidated.csv';
 system(`paste -d "," $key2 $pattern > $outpath`);
+system(`rm $pattern`);
